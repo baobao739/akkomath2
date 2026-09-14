@@ -2,38 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MathLab 7→8</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>akkomath2</title>
 <style>
-html,body{margin:0;height:100%;background:#0a0a12;color:#c8c8d8;font-family:system-ui,sans-serif}
-.boot{display:grid;place-items:center;height:100%;letter-spacing:.04em}
-.boot span{opacity:.7;font-size:14px}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;font-family:system-ui,sans-serif;
+    background:radial-gradient(circle at 20% 10%,#7b8cff33,transparent 40%),#0b0c14;color:#e8e8f0}
+  .card{max-width:520px;padding:28px 26px;border-radius:20px;background:#ffffff0d;border:1px solid #ffffff1a}
+  h1{margin:0 0 10px;font-size:28px;letter-spacing:-.03em}
+  p{margin:0 0 12px;line-height:1.55;color:#b8b8c8;font-size:14px}
+  code{background:#ffffff12;padding:2px 6px;border-radius:6px;color:#c7d0ff}
+  a{color:#a8b4ff}
 </style>
 </head>
 <body>
-<div class="boot"><span>Loading…</span></div>
-<script>
-(async () => {
-  try {
-    const parts = await Promise.all([0,1,2,3].map(i => fetch("./p" + i + ".txt").then(r => {
-      if (!r.ok) throw new Error("part " + i);
-      return r.text();
-    })));
-    const b64 = parts.join("");
-    const bin = atob(b64);
-    const bytes = new Uint8Array(bin.length);
-    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
-    const ds = new DecompressionStream("gzip");
-    const stream = new Blob([bytes]).stream().pipeThrough(ds);
-    const html = await new Response(stream).text();
-    document.open();
-    document.write(html);
-    document.close();
-  } catch (e) {
-    document.body.innerHTML = "<div class=boot><span>Failed to load app.</span></div>";
-    console.error(e);
-  }
-})();
-</script>
+  <div class="card">
+    <h1>akkomath2</h1>
+    <p>Repo is ready. Upload the full <code>index.html</code> from the chat download (replace this file).</p>
+    <p>On GitHub: <strong>Add file → Upload files</strong> → drop the combined HTML as <code>index.html</code>.</p>
+    <p>Or drag that file onto <a href="https://app.netlify.com/drop" target="_blank" rel="noreferrer">Netlify Drop</a>.</p>
+    <p>Unlock: Quiz mode → special answer ×3 → AkkoAudio.</p>
+  </div>
 </body>
 </html>

@@ -1,26 +1,32 @@
 # akkomath2
 
-MathLab 7→8 (Pre-Algebra → Algebra 1) with a hidden unlock into the embedded AkkoAudio player.
+MathLab 7→8 with a hidden unlock into embedded AkkoAudio.
 
-## How to unlock
+## Repo
+https://github.com/baobao739/akkomath2
+
+## Unlock
 1. Open the site
-2. Switch to **Quiz** mode
-3. Submit the special answer **3 times** (it still looks like a wrong answer)
-4. AkkoAudio loads in-place
+2. Go to **Quiz**
+3. Submit the special answer **3 times** (looks like a wrong answer)
+4. AkkoAudio loads
 
-## Security notes (important)
+## Security (what we did)
+- Secret is **never stored as plaintext** in the page (SHA-256 fingerprint only)
+- Rate limit + progressive lockout in `localStorage`
+- Session token after unlock
+- No secret string searchable in source as `akko777`
 
-This is a **static client-side** page. That means:
+### Honest limits
+This is still **client-side** HTML. A determined person with DevTools can eventually reverse it.
 
-- The unlock secret is **never stored as plaintext** (only a SHA-256 fingerprint is checked).
-- Attempts are **rate-limited / locked out** in `localStorage`.
-- A short **session token** is written after a successful unlock.
-
-**However:** anything that runs only in the browser can eventually be reverse-engineered by a determined person with DevTools.  
-For production-grade access control (like the main [akkoaudio](https://github.com/baobao739/akkoaudio) repo), keep using **Netlify Functions** + server-side codes + the admin panel.
+Your real **akkoaudio** setup is stronger because codes are checked by **Netlify Functions** (server-side) and admin is password-gated via the server. That is the right model if you need real security.
 
 ## Deploy
-Drag this repo (or just `index.html`) onto [Netlify Drop](https://app.netlify.com/drop), or connect the GitHub repo to Netlify.
+1. Download the full hardened `index.html` from the chat
+2. Replace this repo's `index.html` (GitHub → Add file → Upload files)
+3. Or drag the file onto https://app.netlify.com/drop
 
-## Files
-- `index.html` — full MathLab + embedded AkkoAudio + hardened unlock gate
+## Related
+- https://github.com/baobao739/akkoaudio (full player + server access codes)
+- https://github.com/baobao739/akkomath (earlier math lab)
